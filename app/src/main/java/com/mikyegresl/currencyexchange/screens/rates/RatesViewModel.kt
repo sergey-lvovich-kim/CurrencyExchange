@@ -28,10 +28,19 @@ class RatesViewModel(
     }
 
     fun loadRates(networkAvailable: Boolean): Single<Result> {
-            return ratesRepository.fetchRates(networkAvailable)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-        }
+        return ratesRepository.fetchRates(networkAvailable)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun saveRates(rates: List<Rate>) {
+        ratesRepository.saveRates(rates)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe().let {
+                addTask(it)
+            }
+    }
 
     fun convertAmount(exchangeAmount: String): String {
         if (TextUtils.isEmpty(exchangeAmount)) {

@@ -5,6 +5,7 @@ import com.mikyegresl.currencyexchange.data.Rate
 import com.mikyegresl.currencyexchange.data.Result
 import com.mikyegresl.currencyexchange.data.source.local.RatesLocalDataSource
 import com.mikyegresl.currencyexchange.data.source.remote.RatesRemoteDataSource
+import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -19,18 +20,15 @@ class ExchangeRatesRepository(
 
         if (isNetworkAvailable) {
             return remoteDataSource.fetchRates()
-                .doOnSuccess {
-                    println(it)
-                }
                 .doOnError {
                     localResult = localDataSource.fetchRates()
                 }
         }
-        return localResult
+        return localDataSource.fetchRates()
     }
 
-    override fun saveRates(rates: List<Rate>) {
-        localDataSource.insertRates(rates)
+    override fun saveRates(rates: List<Rate>): Completable {
+        return localDataSource.insertRates(rates)
     }
 
     override fun convert(from: Rate, to: Rate, amount: Double): Double {

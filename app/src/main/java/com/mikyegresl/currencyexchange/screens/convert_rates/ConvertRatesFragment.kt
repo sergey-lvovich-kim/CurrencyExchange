@@ -68,6 +68,7 @@ class ConvertRatesFragment: BaseFragment(), ConvertRatesViewMvc.Listener {
                     viewMvc.hideProgressIndication()
                     dataLoaded = true
                     if (it is Result.Success) {
+                        viewModel.saveRates(it.rates)
                         viewMvc.bindRates(it.rates)
                     }
                     if (it is Result.Failure) {
@@ -90,10 +91,12 @@ class ConvertRatesFragment: BaseFragment(), ConvertRatesViewMvc.Listener {
 
     override fun onFromCurrencyClicked(rate: Rate) {
         viewModel.fromCurrency = rate
+//        viewModel.cacheFromCurrency(rate)
     }
 
     override fun onToCurrencyClicked(rate: Rate) {
         viewModel.toCurrency = rate
+//        viewModel.cacheToCurrency(rate)
     }
 
     override fun onConvertClicked(inputAmount: String) {

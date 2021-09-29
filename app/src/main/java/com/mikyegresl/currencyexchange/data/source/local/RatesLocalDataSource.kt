@@ -11,9 +11,9 @@ class RatesLocalDataSource(
     private val ratesDao: RatesDao
 ): RatesDataSource {
     override fun fetchRates(): Single<Result> {
-        return ratesDao.fetchRates().map { response ->
-            if (response.isNotEmpty()) {
-                return@map Result.Success(response)
+        return ratesDao.fetchRates().map {
+            if (it.isNotEmpty()) {
+                return@map Result.Success(it)
             }
             return@map Result.Failure("201", "Empty data set in cache.")
         }
