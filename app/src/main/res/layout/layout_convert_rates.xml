@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".screens.convert_rates.ConvertRatesFragment"
+    android:id="@+id/swipe_refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Spinner
+            android:id="@+id/from_currency_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/to_currency_spinner"
+            android:layout_marginTop="@dimen/xxl_margin"
+            android:layout_marginStart="@dimen/xl_margin"
+            android:layout_marginEnd="@dimen/s_margin" />
+
+        <Spinner
+            android:id="@+id/to_currency_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/from_currency_spinner"
+            app:layout_constraintStart_toEndOf="@id/from_currency_spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/s_margin"
+            android:layout_marginEnd="@dimen/xl_margin"/>
+
+        <EditText
+            android:id="@+id/input_amount_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/from_currency_spinner"
+            app:layout_constraintStart_toStartOf="@id/from_currency_spinner"
+            app:layout_constraintEnd_toEndOf="@id/to_currency_spinner"
+            android:layout_marginTop="@dimen/xxl_margin"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/convert_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/input_amount_edit_text"
+            app:layout_constraintStart_toStartOf="@id/from_currency_spinner"
+            app:layout_constraintEnd_toEndOf="@id/to_currency_spinner"
+            android:layout_marginTop="@dimen/xxl_margin"
+            android:layout_marginHorizontal="@dimen/xl_margin"
+            android:text="@string/convert"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:fontFamily="@font/geometria_medium"
+            android:textAllCaps="false"/>
+
+        <TextView
+            android:id="@+id/exchange_rate_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/converted_amount_text_view"
+            app:layout_constraintStart_toStartOf="@id/convert_btn"
+            app:layout_constraintEnd_toEndOf="@id/convert_btn"
+            android:layout_marginBottom="@dimen/l_margin"
+            android:gravity="start"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/geometria_medium"
+            android:text="@string/exchange_rate"/>
+
+        <TextView
+            android:id="@+id/converted_amount_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/exchange_rate_text_view"
+            app:layout_constraintEnd_toEndOf="@id/exchange_rate_text_view"
+            android:layout_marginBottom="@dimen/xxl_margin"
+            android:gravity="start"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/geometria_medium"
+            android:text="@string/converted_amount"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
